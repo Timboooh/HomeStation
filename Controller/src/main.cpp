@@ -4,6 +4,7 @@
 #include "bme680.hpp"
 #include "wifiController.hpp"
 #include "mqttController.hpp"
+#include "sr602.hpp"
 
 void mqtt_receive(const char *topic, byte *message, unsigned int length);
 
@@ -24,12 +25,14 @@ void setup()
 
     // Sensor setup
     BME680::setup(documentVariant);
+    SR602::setup(documentVariant);
 }
 
 void loop()
 {
     WiFiController::update();
     MqttController::update();
+    SR602::update();
 
     long now = millis();
     if (now - lastUpdate > 5000)
