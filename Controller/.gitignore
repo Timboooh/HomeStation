@@ -27,5 +27,7 @@
 # Support for Project snippet scope
 .vscode/*.code-snippets
 
-# Ignore code-workspaces
-*.code-workspace
+
+src/Credentials.h
+include/Credentials.h
+.vscode/launch.json
