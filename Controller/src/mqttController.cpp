@@ -64,8 +64,8 @@ namespace MqttController
         mqttClient.publish(OUTGOING_TOPIC, messageBuffer, length);
     }
 
-    void setCallback(MQTT_CALLBACK_SIGNATURE)
+    PubSubClient setCallback(MQTT_CALLBACK_SIGNATURE)
     {
-        mqttClient.setCallback(callback);
+        return mqttClient.setCallback(callback);
     }
 }

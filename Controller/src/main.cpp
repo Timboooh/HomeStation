@@ -44,7 +44,6 @@ void loop()
     }
 }
 
-
 void mqtt_receive(const char *topic, byte *message, unsigned int length)
 {
     Serial.print(F("Message received: "));

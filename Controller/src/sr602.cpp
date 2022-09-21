@@ -2,10 +2,14 @@
 
 #include <Arduino.h>
 
+//TODO Use interrupts
 namespace SR602
 {
     long lastDetected = 0;
     bool isOn = false;
+
+    std::function<void()> upCallback;
+    std::function<void()> downCallback;
 
     void setup(JsonVariant documentVariant)
     {
@@ -18,5 +22,15 @@ namespace SR602
 
         long diff = millis() - lastDetected;
         isOn = diff < SR602_TIMEOUT;
+    }
+
+    void setUpCallback(std::function<void()> callback)
+    {
+        upCallback = callback;
+    }
+
+    void setDownCallback(std::function<void()> callback)
+    {
+        downCallback = callback;
     }
 } // namespace SR602
