@@ -23,9 +23,8 @@ void setup()
         digitalWrite(LED_BUILTIN, led_status);
     }
     digitalWrite(LED_BUILTIN, false);
-    Serial.println("");
-
-    Serial.println(F("WiFi connected"));
+    Serial.println(F("connected!"));
+    
     Serial.print(F("IP address: "));
     Serial.println(WiFi.localIP());
 }

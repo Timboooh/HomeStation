@@ -9,7 +9,7 @@ namespace MqttController
     void setup(JsonVariant documentVariant);
     void update();
     void publish();
-    PubSubClient setCallback(MQTT_CALLBACK_SIGNATURE);
+    void setCallback(MQTT_CALLBACK_SIGNATURE);
 }
 
 #endif

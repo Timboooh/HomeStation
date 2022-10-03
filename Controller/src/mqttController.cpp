@@ -28,7 +28,7 @@ namespace MqttController
                 // Attempt to connect
                 if (mqttClient.connect("ESP32", MQTT_USER, MQTT_PW))
                 {
-                    Serial.println("connected");
+                    Serial.println("connected!");
                     // Subscribe
                     mqttClient.subscribe(INCOMING_TOPIC);
                 }
@@ -64,8 +64,8 @@ namespace MqttController
         mqttClient.publish(OUTGOING_TOPIC, messageBuffer, length);
     }
 
-    PubSubClient setCallback(MQTT_CALLBACK_SIGNATURE)
+    void setCallback(MQTT_CALLBACK_SIGNATURE)
     {
-        return mqttClient.setCallback(callback);
+        mqttClient.setCallback(callback);
     }
 }
