@@ -6,6 +6,9 @@
 #include "mqttController.hpp"
 #include "sr602.hpp"
 
+#define LATITUDE 51.917255
+#define LONGITUDE 4.484172
+
 void mqtt_receive(const char *topic, byte *message, unsigned int length);
 
 DynamicJsonDocument jsonDocument(1024);
@@ -26,6 +29,10 @@ void setup()
     // Sensor setup
     BME680::setup(documentVariant);
     SR602::setup(documentVariant);
+
+    //Location set
+    jsonDocument["latitude"] = LATITUDE;
+    jsonDocument["longitude"] = LONGITUDE;
 }
 
 void loop()
