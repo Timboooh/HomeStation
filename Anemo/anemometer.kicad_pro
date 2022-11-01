@@ -366,7 +366,7 @@
       "netlist": "",
       "specctra_dsn": "",
       "step": "",
-      "vrml": ""
+      "vrml": "../export/anemometer.wrl"
     },
     "page_layout_descr_file": ""
   },
