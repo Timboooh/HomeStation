@@ -6,6 +6,8 @@
 #include "mqttController.hpp"
 #include "sr602.hpp"
 #include "ws2812b.hpp"
+#include "beeper.hpp"
+#include "anemometer.hpp"
 
 #define LATITUDE 51.917255
 #define LONGITUDE 4.484172
@@ -30,9 +32,11 @@ void setup()
     // Sensor setup
     BME680::setup(documentVariant);
     SR602::setup(documentVariant);
+    ANEMO::setup(documentVariant);
 
     // Actuator setup
     WS2812B::setup();
+    BEEPER::setup();
 
     // Location set
     jsonDocument["latitude"] = LATITUDE;
@@ -53,6 +57,8 @@ void loop()
         lastUpdate = now;
 
         BME680::update();
+        ANEMO::update();
+
         MqttController::publish();
     }
 }
@@ -70,9 +76,13 @@ void mqtt_receive(const char *topic, byte *message, unsigned int length)
         Serial.print((char)message[i]);
         messageTemp += (char)message[i];
     }
-    Serial.println();
 
-    if (String(topic) == "esp32/testColor/R")
-    {
-    }
+    DynamicJsonDocument doc(256);
+    deserializeJson(doc, messageTemp);
+
+    bool beep = doc["Beep"];
+    const char* color = doc["Color"];
+
+    if (color != NULL) WS2812B::setColor(color);
+    BEEPER::setBeeper(beep);
 }

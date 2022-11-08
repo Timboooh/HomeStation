@@ -2,23 +2,25 @@
 
 #include <Arduino.h>
 
-#define HALL_PIN 34
+#define ANEMO_PIN 32
 
-namespace Anemometer
+namespace ANEMO
 {
     JsonVariant document;
-    long last = 0;
 
-    void ISR(){
-        last = millis();
-    }
-
-    void setup(JsonVariant documentVariant){
+    void setup(JsonVariant documentVariant)
+    {
         document = documentVariant;
-        attachInterrupt(HALL_PIN, ISR, RISING);
+        pinMode(ANEMO_PIN, INPUT);
     }
 
-    void update(){
-        Serial.println(last);
+    void update()
+    {
+        double read = analogRead(ANEMO_PIN);
+
+        double volt = (read * 3.3) / (4095);
+        double speed = (volt - 0.26) / 1.6 * 32.4;
+        
+        document["Windspeed"] = speed;
     }
 } // namespace Anemometer

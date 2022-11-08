@@ -3,7 +3,7 @@
 
 #include <ArduinoJson.h>
 
-namespace Anemometer
+namespace ANEMO
 {
     void setup(JsonVariant documentVariant);
     void update();

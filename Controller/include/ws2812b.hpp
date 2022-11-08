@@ -3,10 +3,22 @@
 
 namespace WS2812B
 {
+    enum LedColor
+    {
+        Red,
+        Pink,
+        LightBlue,
+        Green,
+        Yellow,
+        Blue,
+        Rainbow
+    };
+
     void setup();
     void update();
+    void setColor(LedColor color);
+    void setColor(const char *color);
+
 } // namespace WS2812B
 
-
 #endif
-
