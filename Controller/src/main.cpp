@@ -5,6 +5,7 @@
 #include "wifiController.hpp"
 #include "mqttController.hpp"
 #include "sr602.hpp"
+#include "ws2812b.hpp"
 
 #define LATITUDE 51.917255
 #define LONGITUDE 4.484172
@@ -30,7 +31,10 @@ void setup()
     BME680::setup(documentVariant);
     SR602::setup(documentVariant);
 
-    //Location set
+    // Actuator setup
+    WS2812B::setup();
+
+    // Location set
     jsonDocument["latitude"] = LATITUDE;
     jsonDocument["longitude"] = LONGITUDE;
 }
@@ -40,6 +44,8 @@ void loop()
     WiFiController::update();
     MqttController::update();
     SR602::update();
+
+    WS2812B::update();
 
     long now = millis();
     if (now - lastUpdate > 5000)
