@@ -9,8 +9,8 @@
 #include "beeper.hpp"
 #include "anemometer.hpp"
 
-#define LATITUDE 51.917255
-#define LONGITUDE 4.484172
+#define LATITUDE 51.55652
+#define LONGITUDE 4.51647
 
 void mqtt_receive(const char *topic, byte *message, unsigned int length);
 
@@ -80,9 +80,15 @@ void mqtt_receive(const char *topic, byte *message, unsigned int length)
     DynamicJsonDocument doc(256);
     deserializeJson(doc, messageTemp);
 
-    bool beep = doc["Beep"];
-    const char* color = doc["Color"];
+    if (doc.containsKey("Beeper"))
+    {
+        bool beep = doc["Beeper"];
+        BEEPER::setBeeper(beep);
+    }
 
-    if (color != NULL) WS2812B::setColor(color);
-    BEEPER::setBeeper(beep);
+    if (doc.containsKey("Color"))
+    {
+        const char *color = doc["Color"];
+        WS2812B::setColor(color);
+    }
 }

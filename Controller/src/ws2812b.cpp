@@ -45,28 +45,30 @@ namespace WS2812B
         switch (color)
         {
         case Red:
-            ledColor = HslColor(0/6.0f, 1, lightness);
+            ledColor = HslColor(0 / 6.0f, 1, lightness);
             break;
         case Yellow:
-            ledColor = HslColor(1/6.0f, 1, lightness);
+            ledColor = HslColor(1 / 6.0f, 1, lightness);
             break;
         case Green:
-            ledColor = HslColor(2/6.0f, 1, lightness);
+            ledColor = HslColor(2 / 6.0f, 1, lightness);
             break;
         case LightBlue:
-            ledColor = HslColor(3/6.0f, 1, lightness);
+            ledColor = HslColor(3 / 6.0f, 1, lightness);
             break;
         case Blue:
-            ledColor = HslColor(4/6.0f, 1, lightness);
+            ledColor = HslColor(4 / 6.0f, 1, lightness);
             break;
         case Pink:
-            ledColor = HslColor(5/6.0f, 1, lightness);
+            ledColor = HslColor(5 / 6.0f, 1, lightness);
             break;
         case Rainbow:
             rainbow = true;
-
+            break;
+        case Black:
         default:
-            return;
+            ledColor = HslColor(0, 0, 0);
+            break;
         }
 
         for (size_t i = 0; i < PixelCount; i++)
@@ -79,7 +81,7 @@ namespace WS2812B
 
     void setColor(const char *color)
     {
-        if      (strcmp(color, "Red") == 0)
+        if (strcmp(color, "Red") == 0)
             setColor(Red);
         else if (strcmp(color, "Pink") == 0)
             setColor(Pink);
@@ -93,5 +95,10 @@ namespace WS2812B
             setColor(Blue);
         else if (strcmp(color, "Rainbow") == 0)
             setColor(Rainbow);
+        else if (strcmp(color, "Black") == 0)
+            setColor(Black);
+        else
+            setColor(Black);
+
     }
 } // namespace WS2812B

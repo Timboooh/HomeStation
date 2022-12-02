@@ -11,7 +11,8 @@ namespace WS2812B
         Green,
         Yellow,
         Blue,
-        Rainbow
+        Rainbow,
+        Black
     };
 
     void setup();
